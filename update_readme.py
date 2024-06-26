@@ -3,12 +3,12 @@ import re
 import sys
 
 def fetch_medium_posts(username):
-    feed_url = f'https://medium.com/feed/@{username}'
+    feed_url = f'https://medium.com/feed/@{chiragnemani}'
     response = requests.get(feed_url)
     if response.status_code != 200:
-        raise Exception(f'Failed to fetch Medium posts for {username}')
+        raise Exception(f'Failed to fetch Medium posts for {chiragnemani}')
 
-    posts = re.findall(r'<item>(.*?)</item>', response.text, re.DOTALL)[:5]  # Fetching latest 5 posts
+    posts = re.findall(r'<item>(.*?)</item>', response.text, re.DOTALL)[:4]  # Fetching latest 5 posts
     post_list = [{'title': re.search(r'<title>(.*?)</title>', post).group(1),
                   'link': re.search(r'<link>(.*?)</link>', post).group(1)}
                  for post in posts]
