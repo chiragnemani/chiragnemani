@@ -1,0 +1,26 @@
+name: GitHub Readme Medium Cards
+on:
+  schedule:
+    # Runs every hour, on the hour
+    - cron: "0 * * * *"
+  push:
+    # run when the workflow file is modified
+    branches:
+      - main
+    paths:
+      - ".github/workflows/medium-cards.yml"
+  # run when dispatched from actions tab
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: chiragnemani/github-readme-medium-cards@main
+        with:
+          blog_id: https://medium.com/@chiragnemani
+          comment_tag_name: MEDIUM-CARDS
+          max_title_lines: 2
+          medium_api_key: ${{ https://api.medium.com/v1 }}
+          show_duration: true
+          output_type: html
